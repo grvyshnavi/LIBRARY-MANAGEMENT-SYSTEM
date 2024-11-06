@@ -1,3 +1,9 @@
+Name:VYSHNAVI G R 
+Company:C ODETECH IT SOLUTIONS
+ID:CT08DS8993 
+Domain:Python programming
+Duration:October to November 2024
+
 # LIBRARY-MANAGEMENT-SYSTEM
 Develop a Python program to manage library resources such as books,
 magazines, and DVDs. The system should support functionalities like
