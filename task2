@@ -1,0 +1,49 @@
+from datetime import datetime, timedelta
+
+class LibraryItem:
+    def __init__(self, title, category):
+        self.title = title
+        self.category = category
+        self.checked_out = False
+        self.due_date = None
+
+    def checkout(self):
+        if not self.checked_out:
+            self.checked_out = True
+            self.due_date = datetime.now() + timedelta(days=14)  # 2-week checkout period
+            print(f"{self.title} checked out. Due on {self.due_date.date()}.")
+        else:
+            print(f"{self.title} is already checked out.")
+
+    def return_item(self):
+        if self.checked_out:
+            overdue_days = (datetime.now() - self.due_date).days
+            fine = max(0, overdue_days)  # $1 fine per day overdue
+            print(f"{self.title} returned. Fine: ${fine}")
+            self.checked_out = False
+            self.due_date = None
+        else:
+            print(f"{self.title} was not checked out.")
+
+class Library:
+    def __init__(self):
+        self.items = []
+
+    def add_item(self, title, category):
+        item = LibraryItem(title, category)
+        self.items.append(item)
+        print(f"Added {title} to the library.")
+
+    def search_by_title(self, title):
+        results = [item for item in self.items if item.title.lower() == title.lower()]
+        return results
+
+library = Library()
+
+library.add_item("The Great Gatsby", "Book")
+library.add_item("National Geographic", "Magazine")
+
+item = library.search_by_title("The Great Gatsby")[0]
+item.checkout()
+
+item.return_item()
